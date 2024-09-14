@@ -77,12 +77,11 @@ function App() {
 
   const lastPostIndex = currentPage * postPerPage; // 1.6.3. Constante para el index del úlitmo post de la página 
   const firstPostIndex = lastPostIndex - postPerPage; // 1.6.4. Constante para el index del primer post de la página
-  const currentPost = Items.slice(firstPostIndex, lastPostIndex) // 1.6.5. Constante
   
   //* 2. Lógicas
   // 2.1. Lógica de filtraje de datos del query
   const filtro = useMemo(() => {
-    return currentPost.filter((item) => {
+    return Items.filter((item) => {
       return (
         item.nombre.toLowerCase().includes(query.toLowerCase()) && // 2.1.1. Se filtra el nombre del producto siempre y cuando incluya el texto escrito en el buscador (query State)
         (item.categoria === selectedValue || selectedValue === "") // 2.1.2. Se filtra si la categoría del producto es igual a la categoría seleccionada, pasa todo si no hay categoría seleccionada
@@ -90,7 +89,7 @@ function App() {
     }, [Items, query]);
   });
 
-
+  const currentPost = filtro.slice(firstPostIndex, lastPostIndex) // 1.6.5. Constante
 
   //* 3. Funciones
   // 3.1. Función para agregar productos al pedido
@@ -152,7 +151,7 @@ function App() {
     return (
       <>
       <div className="display">
-        {filtro.map((item, index) => ( // Map de los items por lineas, con su boton correspondiente
+        {currentPost.map((item, index) => ( // Map de los items por lineas, con su boton correspondiente
           <div className="displayItem" key={index}>
             <b>{item.nombre}</b><br /> {/* Se muestra el nombre del producto */}
 

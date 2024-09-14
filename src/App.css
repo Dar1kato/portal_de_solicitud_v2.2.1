@@ -233,6 +233,7 @@ header .logoCarrito {
     align-items: center; 
     justify-content: center;
     padding: 5px 10px;
+    border: 1px solid black;
 }
 
 .paginacion button {
