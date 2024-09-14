@@ -225,6 +225,20 @@ header .logoCarrito {
     float: right;
 }
 
+/* Formatos para el menú de paginación */
+
+.paginacion {
+    display: flex;
+    flex-direction: row; 
+    align-items: center; 
+    justify-content: center;
+    padding: 5px 10px;
+}
+
+.paginacion button {
+    margin: 1px 5px;
+    background-color: white;
+}
 
 /* Formatos para el buscador */
 .buscador {

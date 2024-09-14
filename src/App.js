@@ -70,13 +70,19 @@ function App() {
   const [bag, setBag] = useState([]) // 1.3. Estado de la bolsa donde se guardan los productos
   const [carritoWidth, setCarritoWidth] = useState('300') // 1.4. Estado del tamaño del carrito. En caso de que se opte por un carrito permanente en la página, este State puede eliminarse
   const [selectedValue, setSelectedValue] = useState(''); // 1.5. Estado de la categoría selecionada en el filtro
+  
+  // 1.6. Estados y constantes para la paginación
+  const [currentPage, setCurrentPage] = useState(1) // 1.6.1. Estado para la página actual
+  const [postPerPage, setPostPerPAge] = useState(16) // 1.6.2. Estado para los productos mostrados por página
 
-
+  const lastPostIndex = currentPage * postPerPage; // 1.6.3. Constante para el index del úlitmo post de la página 
+  const firstPostIndex = lastPostIndex - postPerPage; // 1.6.4. Constante para el index del primer post de la página
+  const currentPost = Items.slice(firstPostIndex, lastPostIndex) // 1.6.5. Constante
   
   //* 2. Lógicas
   // 2.1. Lógica de filtraje de datos del query
   const filtro = useMemo(() => {
-    return Items.filter((item) => {
+    return currentPost.filter((item) => {
       return (
         item.nombre.toLowerCase().includes(query.toLowerCase()) && // 2.1.1. Se filtra el nombre del producto siempre y cuando incluya el texto escrito en el buscador (query State)
         (item.categoria === selectedValue || selectedValue === "") // 2.1.2. Se filtra si la categoría del producto es igual a la categoría seleccionada, pasa todo si no hay categoría seleccionada
@@ -214,8 +220,32 @@ function App() {
       );
      }
 
+  function Pagination() {
+    let pages = [];
+    const totalPost = Object.keys(datos).length;
+
+    console.log("modulo");
+    console.log(lastPostIndex);
+
+    for (let i = 1; i <= Math.ceil(totalPost/postPerPage); i++ ) {
+      pages.push(i);
+    }
+
+    return (
+      <div className="paginacion">
+        <button onClick={() => setCurrentPage(postPerPage === lastPostIndex ? currentPage : currentPage - 1)}>Anterior</button>
+        {pages.map((page, index) => {
+          return (
+            <button key={index} onClick={() => setCurrentPage(page)}>{page}</button>
+        )
+        })}
+        <button onClick={() => setCurrentPage(currentPage === pages[pages.length - 1] ? currentPage: currentPage + 1)}>Siguiente</button>
+      </div>
+    )
+  }
 
 
+    
   //* 5. Cuepro principal
   return ( 
   <>
@@ -246,6 +276,9 @@ function App() {
 
     {/* 5.5. Crear el display de la lista de todos los productos */}
     <ListDisplay />
+
+
+    <Pagination />
 
     {/* 5.6. Crear el footer donde se lista el copyright y el contacto principal del departamenteo */}
     <footer>
