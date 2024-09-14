@@ -1,70 +1,26 @@
-# Getting Started with Create React App
+# Universidad Iberoamericana de Puebla #
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Ingeniería en Sistemas Computacionales
 
-## Available Scripts
+# Autor #
 
-In the project directory, you can run:
+Daniel Peña Cruz
 
-### `npm start`
+Este es un proyecto para el Servicio Becario del departamento de Ing. en Sistemas de la Ibero Puebla.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Objetivo #
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Crear un portal web que permita a los alumnos de la universidad solicitar diversos insumos (Instrumentos de laboratorio, componentes, dispositivos, etc.).
 
-### `npm test`
+# Tecnologías utilizadas #
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Se utilizó principalmente React.js para la interactividad de la página, CSS para estilo y Git para control de versiones,
 
-### `npm run build`
+# Pendiente #
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1- Implementar el query a la base de datos con la información de todos los productos a solicitar.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2- Conectar la página principal con una segunda página que contenga un formulario. Este formulario servirá para solicitar la información necesaria al alumno solicitante y terminar con la solicitud.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# TODOS LOS DERECHOS RESEVADOS #
