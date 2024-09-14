@@ -8,15 +8,17 @@
 //* [Declaración de librerias]
 import React, { useMemo, useState } from "react";
 import './App.css';
-import { Toaster, toast } from "sonner";
+
+// Librería para notificaciones en pantalla
+import { Toaster, toast } from "sonner"; 
 
 
 function App() {
-  //* FIREBASE API
+  //* Almacenaje de Datos para ser usados en la página
+  //TODO Implementar la solicitud de datos a Firebase en forma de un objeto con el formato de la constante "datos" en la linea 22
+  //! Por alguna razón no he podido conectar con Firebase, por temas de "modulos"(?) de la libreria Firestore, queda pendiente solucionar ese problema
 
-  //* [Almacen de Datos para ser usados en la página]
-  //? NOTA: para fines de prueba se utiliza un array con datos. En la práctica sera necesario crear esta variable con datos recogidos de una base de datos externa
-  //TODO queda pendiente implementar el query a la base de datos principal donde estan guardados los datos de los productos
+  // Objeto principal de almacenaje de Datos. Almacena nombre, categoría y enlace a imagen de cada producto
   const datos = {
     producto1: { nombre: 'Estación de Calor', categoria: 'Electrónica', imagenURL: "https://tronfix.com/3959-large_default/estacion-de-calor-quick-861dw.jpg" },
     producto2: { nombre: 'Multímetro', categoria: 'Electrónica', imagenURL: "https://www.steren.com.mx/media/catalog/product/cache/0236bbabe616ddcff749ccbc14f38bf2/image/200344c8a/multimetro-digital-auto-rango-con-detector-de-voltaje.jpg"},
@@ -59,49 +61,48 @@ function App() {
     producto39: { nombre: 'Sensor de temperatura', categoria:'Mecatrónica' },
     producto40: { nombre: 'Controlador lógico programable (PLC)', categoria:'Mecatrónica'}
   };
-  
-  const nombresData = Object.values(datos).map(prod => prod.nombre);
-  const categoriasData = Object.values(datos).map(prod => prod.categoria);
-  
+
+
 
   //* 1. Declaraciones de Estados
-
   const [Items, setItems] = useState(Object.values(datos)) // 1.1. Estado de los Items
   const [query, setQuery] = useState("") // 1.2. Estados del query para el buscador
   const [bag, setBag] = useState([]) // 1.3. Estado de la bolsa donde se guardan los productos
-  const [carritoWidth, setCarritoWidth] = useState('300')
-  const [categoria, setCategoria] = useState("");
-  const [selectedValue, setSelectedValue] = useState('');
+  const [carritoWidth, setCarritoWidth] = useState('300') // 1.4. Estado del tamaño del carrito. En caso de que se opte por un carrito permanente en la página, este State puede eliminarse
+  const [selectedValue, setSelectedValue] = useState(''); // 1.5. Estado de la categoría selecionada en el filtro
+
 
   
-
   //* 2. Lógicas
   // 2.1. Lógica de filtraje de datos del query
   const filtro = useMemo(() => {
     return Items.filter((item) => {
       return (
-        item.nombre.toLowerCase().includes(query.toLowerCase()) && (item.categoria === selectedValue || selectedValue === "")
+        item.nombre.toLowerCase().includes(query.toLowerCase()) && // 2.1.1. Se filtra el nombre del producto siempre y cuando incluya el texto escrito en el buscador (query State)
+        (item.categoria === selectedValue || selectedValue === "") // 2.1.2. Se filtra si la categoría del producto es igual a la categoría seleccionada, pasa todo si no hay categoría seleccionada
       );
     }, [Items, query]);
   });
+
+
 
   //* 3. Funciones
   // 3.1. Función para agregar productos al pedido
   function agregarPedido(e, item) {
     e.preventDefault(); // 3.1.1. Evita que se agregue el estado por defecto
-    toast.success(`${item.nombre} agregado al pedido.`, {duration: 2000});
-    return setBag(prev => [...prev, item.nombre]); // 3.1.2. Utilizar la función SetBag para modificar el estado de Bag con los elementos previos y el nuevo elemento
+    toast.success(`${item.nombre} agregado al pedido.`, {duration: 2000}); // 3.1.2. Se notifica al usuario que el producto está en el carrito
+    return setBag(prev => [...prev, item.nombre]); // 3.1.3. Utilizar la función SetBag para modificar el estado de Bag con los elementos previos y el nuevo elemento
   }
 
   // 3.2. Función para abrir el carrito
   function abrirCarrito() {
-    setCarritoWidth('300px');
+    setCarritoWidth('300px'); // Cambia el tamaño del carrito
   }
 
 
   // 3.3. Función para cerrar el carrito
   function cerrarCarrito() {
-    setCarritoWidth('0');
+    setCarritoWidth('0'); // Cambia el tamaño del carrito
   }
 
 
@@ -117,8 +118,9 @@ function App() {
   }
   
 
+
   //* 4. Contenedores
-  // 4.1. Contenedor de los productos a solicitar
+  // 4.1. Contenedor de los productos a solicitar, alias "Carrito"
   function Bolsa() {
     return (
       <div className="carrito" style={{width: carritoWidth}}>
@@ -146,14 +148,16 @@ function App() {
       <div className="display">
         {filtro.map((item, index) => ( // Map de los items por lineas, con su boton correspondiente
           <div className="displayItem" key={index}>
-            {/* Se declara el uso de la función agregarPedido() al activar el botón */}
-            <b>{item.nombre}</b><br />
-            <small>{item.categoria}</small>
-            <img src={item.imagenURL} />
-            <button className="addButton" onClick={(e) => agregarPedido(e, item)}>+</button> 
+            <b>{item.nombre}</b><br /> {/* Se muestra el nombre del producto */}
+
+            <small>{item.categoria}</small> {/* Se muestra la categoría del producto */}
+
+            <img src={item.imagenURL} /> {/* Se muestra la imagen del producto */}
+
+            <button className="addButton" onClick={(e) => agregarPedido(e, item)}>+</button>  {/* Se declara el uso de la función agregarPedido() al activar el botón */}
           </div>
         ))}
-        {filtro.length === 0 && <p className="noMatch">No se encontraron productos</p>}
+        {filtro.length === 0 && <p className="noMatch">No se encontraron productos</p>} {/* Se informa al usuario en caso de no encontrar ningun producto que coincida con lo buscado */}
       </div>
       </>
     );
@@ -168,12 +172,18 @@ function App() {
         <img src="/iberoPueblaImg.png"/>
         <h1>Portal de Solicitud de Insumos</h1>
         </div>
-        <button className="abrirCarrito" onClick={abrirCarrito}><img className="logoCarrito" src="bag.png"></img></button>{/* Botón para abrir el carrito */}
+        <button className="abrirCarrito" onClick={abrirCarrito}><img className="logoCarrito" src="bag.png"></img></button> {/* Botón para abrir el carrito */}
       </header>
     )
   }
 
+
+  // 4.4. Menú desplegable para el Filtro por Categoria
   function Dropdown() {
+    // 4.4.1. Se Declaran las categorías, para ser mostradas dentro del menú
+    //? NOTA: Por el momento las categorías están declaradas "a mano" dentro de la función. 
+    //? Para el correcto funcionamiento de la aplicación, y para preveer cualquier cambio futuro en la base de datos, estas opciones deben ser obtenidas desde la variable principal de datos obtenidos de Firebase
+    //TODO Obtener los datos de la variable desde la cosntante con los datos obtenidos de Firebase
     const options = [
       {value: '', label: '...'},
       {value: 'Ingeniería en Sistemas', label: "Ingeniería en Sistemas"},
@@ -185,13 +195,17 @@ function App() {
     return (
       <>
       <b>Filtrar por categoria: </b>
+      
+      {/* Menu Desplegable */}
       <select
         className="menuFiltrado"
         value={selectedValue}
-        onChange={(e) => setSelectedValue(e.target.value)}
-      >
-      {options.map((option) => (
-        <option key={option.value} value={option.value}>
+        onChange={(e) => setSelectedValue(e.target.value)} 
+      > {/* Se cambia la categoría seleccionada al hacer clic en cualquiera de las opciones disponibles */}
+
+      
+      {options.map((option) => ( // 4.4.2. Se hace un mapeado de las opciones disponibles, para despues mostrarlas en el menu desplegable
+        <option key={option.value} value={option.value}> 
           {option.label}
         </option>
         ))}
@@ -200,10 +214,14 @@ function App() {
       );
      }
 
+
+
   //* 5. Cuepro principal
   return ( 
   <>
+    {/* 5.0.1 Se declara el uso de la notificación de Toaster */}
     <Toaster position="bottom-right"/>
+
     {/* 5.1. Crear la Cabecera */}
     <Cabecera />
     
@@ -211,24 +229,26 @@ function App() {
     <div className="buscador">
       <form className="buscar_texto" type="search" >
 
-        {/* 5.1. Lógica de búsqueda automática */}
+        {/* 5.2.1. Lógica de búsqueda automática */}
         <input placeholder="Buscar..." type="text" onChange={(e) => setQuery(e.target.value)}/> 
+        {/* El query se va actualizando al mismo tiempo que el usuario teclea, lo que permite que se haga el filtraje en vivo */}
 
       </form>
       <br />
+
+      {/* 5.3. Crear el menú desplegable */}
       <Dropdown />
     </div>
-    <br />
 
+    <br />
+    {/* 5.4. Crear el carrito, este empieza escondido */}
     <Bolsa />
 
-    {/* 5.3. Crear el display de la lista de todos los productos */}
+    {/* 5.5. Crear el display de la lista de todos los productos */}
     <ListDisplay />
 
-    {/* 5.4. Crear el footer donde se lista el copyright y el contacto principal del departamenteo */}
+    {/* 5.6. Crear el footer donde se lista el copyright y el contacto principal del departamenteo */}
     <footer>
-      <i>Contacto: servicio@iberopuebla.mx</i>
-      <i>@ Universidad Iberoamericana de Puebla</i>
     </footer>
   </>
   );
