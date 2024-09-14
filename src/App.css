@@ -1,3 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif+Caption:ital@0;1&display=swap');
+
+.pt-serif-caption-regular {
+    font-family: "PT Serif Caption", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+  
+.pt-serif-caption-regular-italic {
+    font-family: "PT Serif Caption", serif;
+    font-weight: 400;
+    font-style: italic;
+}
+
 html {
     overflow: hidden;
     height: 100%;
@@ -48,6 +62,7 @@ body {
     margin: 10px;
     padding: 40px;
     font-size: large;
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.8);
 }
 
 .display button {
@@ -70,6 +85,13 @@ body {
 
 .displayItem {
     transition: transform .2s;
+}
+
+.displayItem img{
+    margin: 0 auto;
+    display: block;
+    max-width: 18vh;
+    max-height: 18vh;
 }
 
 .displayItem:hover {
@@ -96,7 +118,7 @@ header {
 }
 
 header .titulo {
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: serif;
     display: flex;
     align-items: center;
     margin: 10px;
@@ -207,6 +229,23 @@ header .logoCarrito {
 .buscador {
     border: solid 1px black;
     padding: 20px;
+}
+
+input[type=text] {
+    width: 49%;
+    padding: 6px 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1.5px solid black;
+    border-radius: 5px;
+}
+
+/* Formatos para el Menú desplegable */
+.menuFiltrado {
+    cursor: pointer;
+    background-color: white;
+    border: 1.5px solid black;
+    border-radius: 5px;
 }
 
 
