@@ -147,10 +147,11 @@ function App() {
         {filtro.map((item, index) => ( // Map de los items por lineas, con su boton correspondiente
           <div className="displayItem" key={index}>
             {/* Se declara el uso de la función agregarPedido() al activar el botón */}
-            {item.nombre} - {item.categoria}<button className="addButton" onClick={(e) => agregarPedido(e, item)}>+</button> 
+            <b>{item.nombre}</b><br />
+            <small>{item.categoria}</small><button className="addButton" onClick={(e) => agregarPedido(e, item)}>+</button> 
           </div>
         ))}
-        {filtro.length === 0 && <p>No se encontraron productos</p>}
+        {filtro.length === 0 && <p className="noMatch">No se encontraron productos</p>}
       </div>
       </>
     );
@@ -162,7 +163,7 @@ function App() {
     return (
       <header>
         <div className="titulo">
-        <img src="/iberoLogo.png"/>
+        <img src="/iberoPueblaImg.png"/>
         <h1>Portal de Solicitud de Insumos</h1>
         </div>
         <button className="abrirCarrito" onClick={abrirCarrito}><img className="logoCarrito" src="bag.png"></img></button>{/* Botón para abrir el carrito */}
@@ -180,6 +181,8 @@ function App() {
     ];
 
     return (
+      <>
+      Filtrar por categoria: 
       <select
         value={selectedValue}
         onChange={(e) => setSelectedValue(e.target.value)}
@@ -190,6 +193,7 @@ function App() {
         </option>
         ))}
       </select>
+      </>
       );
      }
 
@@ -208,13 +212,12 @@ function App() {
         Buscar:{" "} <input type="text" onChange={(e) => setQuery(e.target.value)}/> 
 
       </form>
+      <br />
+      <Dropdown />
     </div>
     <br />
 
     <Bolsa />
-
-    <Dropdown />
-    
 
     {/* 5.3. Crear el display de la lista de todos los productos */}
     <ListDisplay />
