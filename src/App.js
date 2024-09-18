@@ -8,7 +8,7 @@
 //* [Declaración de librerias]
 import React, { useMemo, useState } from "react";
 import './App.css';
-
+import datos from './datos.json'
 // Librería para notificaciones en pantalla
 import { Toaster, toast } from "sonner"; 
 
@@ -19,7 +19,7 @@ function App() {
   //! Por alguna razón no he podido conectar con Firebase, por temas de "modulos"(?) de la libreria Firestore, queda pendiente solucionar ese problema
 
   // Objeto principal de almacenaje de Datos. Almacena nombre, categoría y enlace a imagen de cada producto
-  const datos = {
+  /*const datos = {
     producto1: { nombre: 'Estación de Calor', categoria: 'Electrónica', imagenURL: "https://tronfix.com/3959-large_default/estacion-de-calor-quick-861dw.jpg" },
     producto2: { nombre: 'Multímetro', categoria: 'Electrónica', imagenURL: "https://www.steren.com.mx/media/catalog/product/cache/0236bbabe616ddcff749ccbc14f38bf2/image/200344c8a/multimetro-digital-auto-rango-con-detector-de-voltaje.jpg"},
     producto3: { nombre: 'Calculadora Científica', categoria: 'Química', imagenURL: "https://www.adosa.com.mx/media/catalog/product/cache/4db89bde2062a3745aaded91f69a9032/0/8/087590_1.jpg" },
@@ -60,8 +60,7 @@ function App() {
     producto38: { nombre: 'Encoder', categoria:'Mecatrónica', imagenURL: "https://dominion.com.mx/tienda/974-large_default/e40s6-1024-6-l-5-encoder-rotativo-autonics.jpg" },
     producto39: { nombre: 'Sensor de temperatura', categoria:'Mecatrónica' },
     producto40: { nombre: 'Controlador lógico programable (PLC)', categoria:'Mecatrónica'}
-  };
-
+  }; */
 
 
   //* 1. Declaraciones de Estados
@@ -83,12 +82,12 @@ function App() {
   const filtro = useMemo(() => {
     return Items.filter((item) => {
       return (
-        item.nombre.toLowerCase().includes(query.toLowerCase()) && // 2.1.1. Se filtra el nombre del producto siempre y cuando incluya el texto escrito en el buscador (query State)
-        (item.categoria === selectedValue || selectedValue === "") // 2.1.2. Se filtra si la categoría del producto es igual a la categoría seleccionada, pasa todo si no hay categoría seleccionada
+        item.nombre.toLowerCase().includes(query.toLowerCase()) &&
+        (selectedValue === "" || item.categoria === selectedValue)
       );
-    }, [Items, query]);
-  });
-
+    }, [Items, query, selectedValue]); // Incluye selectedValue en las dependencias
+  }, [Items, query, selectedValue]);
+  
   const currentPost = filtro.slice(firstPostIndex, lastPostIndex) // 1.6.5. Constante
 
   //* 3. Funciones
@@ -221,7 +220,7 @@ function App() {
 
   function Pagination() {
     let pages = [];
-    const totalPost = Object.keys(datos).length;
+    const totalPost = Object.keys(filtro).length;
 
     console.log("modulo");
     console.log(lastPostIndex);
