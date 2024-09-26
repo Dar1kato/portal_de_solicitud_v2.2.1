@@ -199,12 +199,14 @@ header .logoCarrito {
 .carrito .continuarPedidoBoton {
     bottom: 10px;
     left: 50%;
-    padding: 10px 20px;
+    height: 100px;
+    max-height: 100px;
     cursor: pointer;
     background-color: rgba(238,58,67,255);
     color: white;
     border: 0;
     font-size: 18px;
+    white-space: nowrap;
 }
 
 .productoEnCarrito {
@@ -213,6 +215,7 @@ header .logoCarrito {
     padding: 10px;
     margin: 10px;
     color: rgba(238,58,67,255);
+    white-space: nowrap;
 }
 
 .productoEnCarrito button {
