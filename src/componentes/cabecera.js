@@ -1,15 +1,38 @@
 import React from 'react';
+import './styles.css';
+import { Link } from 'react-router-dom';
+
 
 function Cabecera({ abrirCarrito }) {
   return (
-    <header>
+    <header className = "navbar">
       <div className="titulo">
         <img src="/iberoPueblaImg.png" alt="Ibero Puebla" />
-        <h1>Portal de Solicitud de Insumos</h1>
+        <div>
+          <a class="buttonNav" href="../index.html">Home</a>
+        </div>
+        <div>
+          <a class="buttonNav" href="src\materiales.js">Materials</a>
+        </div>
+        <div>
+          <a class="buttonNav" href="../index.html">Doubts</a>
+        </div>
       </div>
-      <button className="abrirCarrito" onClick={abrirCarrito}>
-        <img className="logoCarrito" src="bag.png" alt="Carrito" />
-      </button>
+      <div>
+
+        <button className="logos" onClick={abrirCarrito}>
+          <img className="logoCarrito" src="bag.png" alt="Carrito" />
+        </button>
+
+        <button className='logos'>
+          <img className="logout" src="logout.png" alt ="Salir" />
+        </button>
+
+        <button className='logos'>
+          <img className="user" src="user.png" alt ="Usuario" />
+        </button>
+
+      </div>
     </header>
   );
 }

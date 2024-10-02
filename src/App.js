@@ -15,6 +15,8 @@ import Cabecera from "./componentes/cabecera";
 import ListDisplay from "./componentes/display";
 import Dropdown from "./componentes/dropdown";
 import Pagination from "./componentes/paginations";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; 
+import Materials from './pages/materiales';
 
 function App() {
   const [Items, setItems] = useState(Object.values(datos));
@@ -24,7 +26,6 @@ function App() {
   const [selectedValue, setSelectedValue] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerPAge] = useState(16);
-
   const lastPostIndex = currentPage * postPerPage;
   const firstPostIndex = lastPostIndex - postPerPage;
 
