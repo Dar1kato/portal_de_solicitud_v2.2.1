@@ -38,3 +38,40 @@
     padding: 15px 20px;
 }
 
+
+.titleDoubts{
+    font-size: 15px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.subtitleDoubts{
+    max-width: 800px; /* Define el ancho máximo del contenedor */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    text-align: center; /* Centra el texto dentro del contenedor */
+    padding: 20px; /* Añade algo de padding para que no esté pegado a los bordes */
+    font-weight: normal;
+}
+
+
+.image-container {
+    position: relative;
+    display: inline-block; /* Para que el tamaño del contenedor se ajuste al de la imagen */
+  }
+  
+  .estacionamientoImage {
+    width: 100%; /* La imagen ocupará todo el ancho del contenedor/pantalla */
+    height: auto; /* Mantiene la proporción de la imagen */
+  }
+  
+  
+  .centered-text {
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    color: white;
+    font-size: 2rem; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+  }
+  

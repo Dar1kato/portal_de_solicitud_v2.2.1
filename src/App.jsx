@@ -34,8 +34,12 @@ function App() {
 
       <Bolsa bag={bag} cerrarCarrito={cerrarCarrito} carritoWidth={carritoWidth} eliminarDeCarrito={eliminarDeCarrito} continuarPedido={continuarPedido} />
       <Routes>
-  
-        <Route path="/" element={<div>Bienvenido al portal de insumos</div>} />
+      <Route path="/" element={
+        <div className="image-container">
+          <img className="estacionamientoImage" src="estacionamientoCopy.jpg" alt="Descripción de la imagen" />
+          <h1 className="centered-text">Bienvenido al portal de insumos</h1>
+        </div>
+      } />
         
         <Route path="/materials" element={<Materials bag={bag} setBag={setBag} />} />
         <Route path="/doubts" element={<Doubts bag={bag} setBag={setBag} />} />
