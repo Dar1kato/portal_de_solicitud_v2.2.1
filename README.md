@@ -5,6 +5,7 @@ Ingeniería en Sistemas Computacionales
 # Autor #
 
 Daniel Peña Cruz
+Naomi Díaz Hurtado
 
 Este es un proyecto para el Servicio Becario del departamento de Ing. en Sistemas de la Ibero Puebla.
 
